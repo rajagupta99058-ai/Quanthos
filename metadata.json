@@ -1,0 +1,8 @@
+{
+  "name": "Quanthos",
+  "description": "An interactive environment that explains math & science concepts clearly and generates real-time, playable 3D Three.js visualizations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
