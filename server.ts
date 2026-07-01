@@ -18,6 +18,12 @@ const PORT = 3000;
 
 app.use(express.json());
 
+// Google Search Console verification endpoint
+app.get("/google3962aa20edca8061.html", (req, res) => {
+  res.setHeader("Content-Type", "text/html");
+  res.send("google-site-verification: google3962aa20edca8061.html");
+});
+
 // Simple in-memory tracker for guest trials by IP address
 const ipGuestUsesMap = new Map<string, number>();
 
@@ -936,22 +942,22 @@ ${structuralHint ? `⚠️ CRITICAL STRUCTURE OVERRIDE — READ THIS FIRST:\n${s
       }
 
       // Determine model to use with extreme resilience across different model families
-      let modelToUse = "gemini-2.5-flash";
+      let modelToUse = "gemini-3.5-flash";
       if (thinkingMode === true) {
         if (attempt === 1) {
           modelToUse = "gemini-3.1-pro-preview";
         } else if (attempt === 2) {
-          modelToUse = "gemini-2.5-flash";
+          modelToUse = "gemini-3.5-flash";
         } else {
-          modelToUse = "gemini-1.5-flash";
+          modelToUse = "gemini-3.1-flash-lite";
         }
       } else {
         if (attempt === 1) {
-          modelToUse = "gemini-2.5-flash";
-        } else if (attempt === 2) {
           modelToUse = "gemini-3.5-flash";
+        } else if (attempt === 2) {
+          modelToUse = "gemini-3.1-flash-lite";
         } else {
-          modelToUse = "gemini-1.5-flash";
+          modelToUse = "gemini-3.5-flash";
         }
       }
 
@@ -1099,4 +1105,10 @@ async function startServer() {
   });
 }
 
-startServer();
+const isNetlify = process.env.NETLIFY === "true" || process.env.LAMBDA_TASK_ROOT;
+
+if (!isNetlify) {
+  startServer();
+}
+
+export { app };
